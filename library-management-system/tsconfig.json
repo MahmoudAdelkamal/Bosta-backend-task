@@ -12,10 +12,13 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "strict": true,  // Enforce stricter TypeScript rules for safer code
+    "strictNullChecks": true,
+    "noImplicitAny": true,  // This helps avoid unintended `any` type usage
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*"],  // Ensures TypeScript compiles everything in the 'src' folder
+  "exclude": ["node_modules", "dist"]  // Exclude unnecessary folders
 }
