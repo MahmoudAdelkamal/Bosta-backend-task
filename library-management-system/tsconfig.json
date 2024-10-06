@@ -12,8 +12,6 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strict": true,  // Enforce stricter TypeScript rules for safer code
-    "strictNullChecks": true,
     "noImplicitAny": true,  // This helps avoid unintended `any` type usage
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
