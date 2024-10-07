@@ -1,4 +1,3 @@
-// src/books/book.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('books')
@@ -20,7 +19,4 @@ export class Book {
 
   @Column()
   shelfLocation: string;
-
-  @Column()
-  lol: string;
 }

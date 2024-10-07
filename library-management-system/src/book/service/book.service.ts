@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Book } from '../entity/book.entity'; // Adjust the path as necessary
+import { Book } from '../entity/book.entity';
 import { Repository, ILike } from 'typeorm';
 import { searchPaginate } from 'src/utils/search-helper';
 
 @Injectable()
 export class BooksService {
   constructor(
-    @InjectRepository(Book) // Inject the Book repository directly
-    private readonly bookRepository: Repository<Book>, // Use Repository<Book> type
+    @InjectRepository(Book)
+    private readonly bookRepository: Repository<Book>,
   ) {}
 
-  // Get all books
   async findAllBooks() {
     const query = this.bookRepository.createQueryBuilder('book');
     const { allRecords, total } = await searchPaginate(query, {
