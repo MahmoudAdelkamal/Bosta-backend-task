@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ILike } from 'typeorm';
+import { Repository, ILike, DataSource } from 'typeorm';
 import { searchPaginate } from 'src/utils/search-helper';
 import { Borrower } from '../entity/borrower.entity';
 import { CreateBorrowerDto } from '../dto/create-borrower.dto';
@@ -12,13 +12,18 @@ import { UpdateBorrowerDto } from '../dto/update-borrower.dto';
 
 @Injectable()
 export class BorrowerService {
-  constructor(
-    @InjectRepository(Borrower)
-    private readonly borrowerRepository: Repository<Borrower>,
-  ) {}
+  constructor(private connection: DataSource) {}
+
+  async findOne(id: number) {
+    return await this.connection.getRepository(Borrower).findOne({
+      where: { id },
+    });
+  }
 
   async findAll() {
-    const query = this.borrowerRepository.createQueryBuilder('borrower');
+    const query = this.connection
+      .getRepository(Borrower)
+      .createQueryBuilder('borrower');
     const { allRecords, total } = await searchPaginate(query, {
       page: 1,
       page_size: 30,
@@ -34,9 +39,11 @@ export class BorrowerService {
 
   async create(createBorrowerDto: CreateBorrowerDto): Promise<Borrower> {
     const { email } = createBorrowerDto;
-    const existingBorrower = await this.borrowerRepository.findOne({
-      where: { email },
-    });
+    const existingBorrower = await this.connection
+      .getRepository(Borrower)
+      .findOne({
+        where: { email },
+      });
 
     if (existingBorrower) {
       throw new ConflictException(
@@ -44,24 +51,30 @@ export class BorrowerService {
       );
     }
 
-    const newBorrower = this.borrowerRepository.create(createBorrowerDto);
-    return await this.borrowerRepository.save(newBorrower);
+    const newBorrower = this.connection
+      .getRepository(Borrower)
+      .create(createBorrowerDto);
+    return await this.connection.getRepository(Borrower).save(newBorrower);
   }
 
   async updateBorrower(
     updateBorrowerDto: UpdateBorrowerDto,
   ): Promise<Borrower> {
     const { id, email } = updateBorrowerDto;
-    const borrower = await this.borrowerRepository.findOne({ where: { id } });
+    const borrower = await this.connection
+      .getRepository(Borrower)
+      .findOne({ where: { id } });
 
     if (!borrower) {
       throw new NotFoundException(`Borrower with ID ${id} not found.`);
     }
 
     if (email && email !== borrower.email) {
-      const existingBorrower = await this.borrowerRepository.findOne({
-        where: { email: email },
-      });
+      const existingBorrower = await this.connection
+        .getRepository(Borrower)
+        .findOne({
+          where: { email: email },
+        });
       if (existingBorrower) {
         throw new ConflictException(
           `Borrower with email ${email} already exists.`,
@@ -70,6 +83,6 @@ export class BorrowerService {
     }
 
     Object.assign(borrower, updateBorrowerDto);
-    return await this.borrowerRepository.save(borrower);
+    return await this.connection.getRepository(Borrower).save(borrower);
   }
 }

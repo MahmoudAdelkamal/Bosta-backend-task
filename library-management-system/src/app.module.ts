@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BooksModule } from './book/book.module';
 import { BorrowerModule } from './borrower/borrower.module';
+import { BorrowingTransactionModule } from './borrowing-transaction/borrowing-transaction.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { BorrowerModule } from './borrower/borrower.module';
     }),
     BooksModule,
     BorrowerModule,
+    BorrowingTransactionModule,
   ],
 })
 export class AppModule {}

@@ -1,27 +1,21 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { BorrowingTransaction } from '../entity/borrower-transaction.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Book } from 'src/book/entity/book.entity';
-import { Borrower } from 'src/borrower/entity/borrower.entity';
 import { CheckoutBookDTO } from '../dto/checkout-book.dto';
+import { BooksService } from 'src/book/service/book.service';
+import { BorrowerService } from 'src/borrower/service/borrower.service';
 
 @Injectable()
 export class BorrowingTransactionService {
   constructor(
-    @InjectRepository(BorrowingTransaction)
-    private readonly borrowingTransactionRepository: Repository<BorrowingTransaction>,
-
-    @InjectRepository(Book)
-    private readonly bookRepository: Repository<Book>,
-
-    @InjectRepository(Borrower)
-    private readonly borrowerRepository: Repository<Borrower>,
+    private connection: DataSource,
+    private bookService: BooksService,
+    private borrowerService: BorrowerService,
   ) {}
 
   async checkoutBook(
@@ -29,14 +23,12 @@ export class BorrowingTransactionService {
   ): Promise<BorrowingTransaction> {
     const { borrowerId, bookId, dueDate } = checkoutBookDto;
 
-    const borrower = await this.borrowerRepository.findOne({
-      where: { id: borrowerId },
-    });
+    const borrower = await this.borrowerService.findOne(borrowerId);
     if (!borrower) {
       throw new NotFoundException('Borrower not found');
     }
 
-    const book = await this.bookRepository.findOne({ where: { id: bookId } });
+    const book = await this.bookService.findOne(bookId);
     if (!book || book.availableQuantity <= 0) {
       throw new NotFoundException('Book not available');
     }
@@ -56,16 +48,20 @@ export class BorrowingTransactionService {
     transaction.dueDate = dueDateObject;
 
     book.availableQuantity--;
-    await this.bookRepository.save(book);
+    await this.connection.getRepository(Book).save(book);
 
-    return await this.borrowingTransactionRepository.save(transaction);
+    return await this.connection
+      .getRepository(BorrowingTransaction)
+      .save(transaction);
   }
 
   async returnBook(transactionId: number): Promise<void> {
-    const transaction = await this.borrowingTransactionRepository.findOne({
-      where: { id: transactionId },
-      relations: ['book'],
-    });
+    const transaction = await this.connection
+      .getRepository(BorrowingTransaction)
+      .findOne({
+        where: { id: transactionId },
+        relations: ['book'],
+      });
     if (!transaction) throw new NotFoundException(`transaction is not found !`);
 
     if (transaction.returnDate) {
@@ -75,10 +71,10 @@ export class BorrowingTransactionService {
     }
 
     transaction.returnDate = new Date();
-    await this.borrowingTransactionRepository.save(transaction);
+    await this.connection.getRepository(BorrowingTransaction).save(transaction);
 
     const book = transaction.book;
     book.availableQuantity++;
-    await this.bookRepository.save(book);
+    await this.connection.getRepository(Book).save(book);
   }
 }
