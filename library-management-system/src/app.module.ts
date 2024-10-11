@@ -9,8 +9,8 @@ import { BorrowingTransactionModule } from './borrowing-transaction/borrowing-tr
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
+      host: 'db',
+      port: 5555,
       username: 'postgres',
       password: 'postgres',
       database: 'Octane',
