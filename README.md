@@ -70,3 +70,33 @@ Make sure you have the following installed:
 
 ### Borrower API
 ## API Documentation for Borrower Section
+## API Documentation for Borrower Section
+
+### 1. Get All Borrowers
+
+- **Endpoint:** `GET /borrowers`
+- **Description:** Retrieves a list of all borrowers.
+- **Responses:**
+  - **200 OK:** Returns an array of borrower objects.
+
+### 2. Create a Borrower
+
+- **Endpoint:** `POST /borrowers`
+- **Description:** Creates a new borrower.
+- **Request Body:**
+  ```json
+  {
+    "name": "string",
+    "email": "string"
+  }
+### 3. update a Borrower
+
+- **Endpoint:** `PATCH /borrowers`
+- **Description:** updates an existing borrower details.
+- **Request Body:**
+  ```json
+  {
+    "id": 1,
+     "name": "",
+     "email": ""
+  }
