@@ -18,8 +18,8 @@ Make sure you have the following installed:
    git clone https://github.com/your-username/book-management-system.git
    cd book-management-system
 
-2- Build and start the application using Docker Compose:
+   2- Build and start the application using Docker Compose:
 
-         docker-compose up --build
+       docker-compose up --build
 
 3- Access the application at http://localhost:3000
