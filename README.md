@@ -10,10 +10,8 @@ The Library management System is an application that allows users to manage book
 
 Make sure you have the following installed:
 
-- Node.js (v14 or later)
-- npm (v6 or later)
-- PostgreSQL (or your preferred database)
-
+- Docker
+- Docker Compose
 ### Installation
 
 1. Clone the repository:
