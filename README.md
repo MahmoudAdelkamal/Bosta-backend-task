@@ -21,8 +21,7 @@ Make sure you have the following installed:
 ## Installation using Docker
 
 1. Clone the repository:
-   - `git clone https://github.com/your-username/book-management-system.git`
-   - `cd book-management-system`
+   - `git clone (https://github.com/MahmoudAdelkamal/Bosta-backend-task)
 
 2. Build and start the application using Docker Compose:
    - `docker-compose up --build`
