@@ -29,32 +29,40 @@ Make sure you have the following installed:
 ## API Documentation
 
 ### Books API
+## API Documentation for Book Section
+### 1. Get All Books
 
-This section outlines the API endpoints for managing books in the system.
+- **Endpoint:** `GET /books`
+- **Description:** Retrieves a list of all books.
+- **Responses:**
+  - **200 OK:** Returns an array of book objects.
 
-#### 1. Get All Books
+### 2. Create a Book
 
-- **Method:** `GET`
-- **Endpoint:** `/books`
-  
-**Response:**
-- **200 OK**
-  - Returns a list of all books in the system.
+- **Endpoint:** `POST /books`
+- **Description:** Creates a new book.
+- **Request Body:**
+  ```json
+  {
+    "title": "string",
+    "author": "string",
+    "publishedDate": "string",
+    "availableQuantity": "number"
+  }
 
-```json
-[
+
+
+### 3. update a Book
+
+- **Endpoint:** `PATCH /books`
+- **Description:** updates an existing book.
+- **Request Body:**
+  ```json
   {
     "id": 1,
-    "title": "Book Title 1",
-    "author": "Author 1",
-    "availableQuantity": 5,
-    // other book fields
-  },
-  {
-    "id": 2,
-    "title": "Book Title 2",
-    "author": "Author 2",
-    "availableQuantity": 3,
-    // other book fields
+    "title": "string",
+    "author": "string",
+    "publishedDate": "string",
+    "availableQuantity": "number"
   }
-]
+  }
