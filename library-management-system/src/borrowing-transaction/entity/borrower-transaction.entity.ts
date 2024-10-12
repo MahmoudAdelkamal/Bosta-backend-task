@@ -18,7 +18,7 @@ export class BorrowingTransaction {
 
   @ManyToOne(() => Borrower, { eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'borrowerId' })
-  borrower: Borrower;
+  borrower?: Borrower;
 
   @Column()
   checkoutDate: Date;
