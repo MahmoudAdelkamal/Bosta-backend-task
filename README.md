@@ -99,3 +99,18 @@ Make sure you have the following installed:
      "name": "",
      "email": ""
   }
+
+
+## API Documentation for Borrowing Transaction Section
+
+### 1. Checkout a Book
+
+- **Endpoint:** `POST /borrowing-transactions/checkout`
+- **Description:** Checks out a book for a borrower.
+- **Request Body:**
+  ```json
+  {
+    "borrowerId": "number",
+    "bookId": "number",
+    "dueDate": "2024-10-20"  // Format: YYYY-MM-DD
+  }
