@@ -114,3 +114,13 @@ Make sure you have the following installed:
     "bookId": "number",
     "dueDate": "2024-10-20"  // Format: YYYY-MM-DD
   }
+
+### 2. Return a Book
+
+- **Endpoint:** `POST /borrowing-transactions/return/:transactionId`
+- **Description:** returns a book from a borrower back to the library.
+- **Request Body:**
+  ```json
+  {
+     "transactionId": 5
+  }
