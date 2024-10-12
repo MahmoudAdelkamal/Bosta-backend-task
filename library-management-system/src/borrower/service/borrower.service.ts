@@ -3,12 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike, DataSource } from 'typeorm';
-import { searchPaginate } from 'src/utils/search-helper';
 import { Borrower } from '../entity/borrower.entity';
 import { CreateBorrowerDto } from '../dto/create-borrower.dto';
 import { UpdateBorrowerDto } from '../dto/update-borrower.dto';
+import { searchPaginate } from 'src/utils/pagination-helper';
 
 @Injectable()
 export class BorrowerService {

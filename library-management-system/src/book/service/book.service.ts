@@ -6,9 +6,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from '../entity/book.entity';
 import { Repository, ILike, DataSource } from 'typeorm';
-import { searchPaginate } from 'src/utils/search-helper';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
+import { searchPaginate } from 'src/utils/pagination-helper';
 
 @Injectable()
 export class BooksService {
