@@ -70,7 +70,6 @@ Make sure you have the following installed:
 
 ### Borrower API
 ## API Documentation for Borrower Section
-## API Documentation for Borrower Section
 
 ### 1. Get All Borrowers
 
