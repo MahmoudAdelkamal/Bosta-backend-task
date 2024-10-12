@@ -21,7 +21,7 @@ Make sure you have the following installed:
 ## Installation using Docker
 
 1. Clone the repository:
-   - `git clone https://github.com/MahmoudAdelkamal/Bosta-backend-task.git
+   - git clone https://github.com/MahmoudAdelkamal/Bosta-backend-task.git
 
 2. Build and start the application using Docker Compose:
    - `docker-compose up --build`
