@@ -25,3 +25,36 @@ Make sure you have the following installed:
 
 3. Access the application at:
    - [http://localhost:3000](http://localhost:3000)
+
+## API Documentation
+
+### Books API
+
+This section outlines the API endpoints for managing books in the system.
+
+#### 1. Get All Books
+
+- **Method:** `GET`
+- **Endpoint:** `/books`
+  
+**Response:**
+- **200 OK**
+  - Returns a list of all books in the system.
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Book Title 1",
+    "author": "Author 1",
+    "availableQuantity": 5,
+    // other book fields
+  },
+  {
+    "id": 2,
+    "title": "Book Title 2",
+    "author": "Author 2",
+    "availableQuantity": 3,
+    // other book fields
+  }
+]
