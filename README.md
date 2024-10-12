@@ -2,9 +2,13 @@
 
 ## Overview
 
-The Library management System is an application that allows users to manage books, including adding new books, updating book details, borrowing books and returning them back.This project is built using NestJS, typeorm and postgres.
+The Library management System is an application that allows users to manage books, including adding new books, updating book details, borrowing books and returning them back.
 
-## Getting Started
+
+## Features implemented : 
+1. Creating restful apis using nodejs, nestjs, postgres and typeorm.
+2. Writing unit testing using jest.
+3. Dockerizing the app using docker-compose.
 
 ### Prerequisites
 
